@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function search() {
+        let headersList = {
+          Accept: "*/*",
+        };
+
+        let result =   document.getElementById("value").value;
+        console.log(result)
+        fetch("https://sns-api.milysec.com/" + result, {
+          method: "GET",
+          headers: headersList,
+        })
+          .then(function (response) {
+            return response.text();
+          })
+          .then(function (data) {
+            console.log(data);
+            document.getElementById('results').innerHTML = data;
+          });
+      }
+    </script>
+    <center>
+
+        <div class="input-holder">
+            <input id="value" type="text" class="search-input" placeholder="Type to search" />
+            <button id="searchBtn" class="search-icon" onclick="search();">
+                SEARCH
+            </button>
+            <span id="results"> Results Land Here</span>
+        </div>
+    </center>
+    <script>
+        document.getElementById("searchBtn").addEventListener("click", function(event){
+          event.preventDefault()
+        });
+        </script>
+  </body>
+</html>
