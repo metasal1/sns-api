@@ -6,31 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Solana Name Search</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="">
-    <script>
-      function search() {
-        let headersList = {
-          Accept: "*/*",
-        };
-
-        let result = document.getElementById("value").value;
-        console.log(result);
-        fetch("https://sns-api.milysec.com/" + result, {
-          method: "GET",
-          headers: headersList,
-        })
-          .then(function (response) {
-            return response.json();
-          })
-          .then(function (data) {
-            console.log(data);
-            document.getElementById("results").innerHTML = data;
-          });
-      }
-    </script>
-
+  <body>
     <div
       class="grid place-content-center justify-center content-center place-self-center text-center"
     >
@@ -47,14 +25,20 @@
         class="padding-3 w-full h-12 px-6 text-white transition-colors duration-150 rounded-lg focus:shadow-outline hover:bg-blue-200 w-full h-12 transition-colors rounded-tl-br bg-gradient-to-r from-cyan-500 to-blue-500"
         onclick="search();"
       >
-      SEARCH
+        SEARCH
       </button>
-      <span id="results"> Results Land Here</span>
+      <div id="results" class="font-bold">Results</div>
+      <hr>
       <p class="text-xs padding-10 margin-10">
         Made with ❤️ in Melbourne by
-        <a class="hover:text-bold underline" href="https://milysec.com" target="_blank">Milysec</a>
+        <a
+          rel="noopener"
+          class="hover:text-bold underline"
+          href="https://milysec.com"
+          target="_blank"
+          >Milysec</a
+        >
       </p>
-
     </div>
     <script>
       document
@@ -63,5 +47,51 @@
           event.preventDefault();
         });
     </script>
+        <script>
+            function search() {
+              let headersList = {
+                Accept: "*/*",
+              };
+      
+              let result = document.getElementById("value").value;
+              console.log(result);
+              fetch("https://sns-api.milysec.com/" + result, {
+                method: "GET",
+                headers: headersList,
+              })
+                .then(function (response) {
+                  return response.json();
+                })
+                .then(function (data) {
+                  // document.getElementById("results").innerHTML = `Domain Name = ${data.data} <br> `;
+                //   let data = {
+                //       data: "metasal",
+                //       publicKey: "GaxVqiQyJKQDRu6H4pfy9V6Xq19pHGr6HQKDQDv911Y4",
+                //       nftOwner: "undefined",
+                //   };
+                  console.log(data);
+      
+                  
+                  const domainDiv = document.createElement("div");
+                  const publicKeyDiv = document.createElement("div");
+                  const nftOwnerDiv = document.createElement("div");
+                  
+                  const domainValue = document.createTextNode(`Domain Name = ${data.data}.sol`);
+                  const publicKeyValue = document.createTextNode(`Public Key =  ${data.publicKey}`);
+                  const nftOwnerValue = document.createTextNode(`NFT Owner = ${data.nftOwner}`);
+                  
+                  domainDiv.appendChild(domainValue);
+                  publicKeyDiv.appendChild(publicKeyValue);
+                  nftOwnerDiv.appendChild(nftOwnerValue);
+                  
+                document.getElementById("results").appendChild(domainDiv);
+                document.getElementById("results").appendChild(publicKeyDiv);
+                document.getElementById("results").appendChild(nftOwnerDiv);
+                document.getElementById("results").appendChild(document.createElement('hr'));
+                
+      
+                });
+            }
+          </script>
   </body>
 </html>
