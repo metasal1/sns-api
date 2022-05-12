@@ -10,16 +10,20 @@
   </head>
   <body>
     <div
-      class="grid place-content-center justify-center content-center place-self-center text-center"
+      class="bg-white rounded-xl shadow-lg m-10 p-10 grid place-content-center justify-center content-center place-self-center text-center"
     >
       <h1 class="text-5xl font-bold m-10">SOLANA NAME SEARCH</h1>
+      <div class="flex text-3xl align-baseline inline-block ">
       <input
         id="value"
-        type="text"
-        class="m-5 border rounded-lg text-5xl border-sky-500 padding-3"
+        type="search"
+        class="m-5 border rounded-lg text-5xl border-sky-500 p-5 w-4/5"
         placeholder="Type to search"
         required
       />
+      .sol
+    </div>
+<div id="loader" class="loader hidden">loading...</div>
       <button
         id="searchBtn"
         class="padding-3 w-full h-12 px-6 text-white transition-colors duration-150 rounded-lg focus:shadow-outline hover:bg-blue-200 w-full h-12 transition-colors rounded-tl-br bg-gradient-to-r from-cyan-500 to-blue-500"
@@ -28,7 +32,7 @@
         SEARCH
       </button>
       <div id="results" class="font-bold">Results</div>
-      <hr>
+      <hr />
       <p class="text-xs padding-10 margin-10">
         Made with ❤️ in Melbourne by
         <a
@@ -47,51 +51,58 @@
           event.preventDefault();
         });
     </script>
-        <script>
-            function search() {
-              let headersList = {
-                Accept: "*/*",
-              };
-      
-              let result = document.getElementById("value").value;
-              console.log(result);
-              fetch("https://sns-api.milysec.com/" + result, {
-                method: "GET",
-                headers: headersList,
-              })
-                .then(function (response) {
-                  return response.json();
-                })
-                .then(function (data) {
-                  // document.getElementById("results").innerHTML = `Domain Name = ${data.data} <br> `;
-                //   let data = {
-                //       data: "metasal",
-                //       publicKey: "GaxVqiQyJKQDRu6H4pfy9V6Xq19pHGr6HQKDQDv911Y4",
-                //       nftOwner: "undefined",
-                //   };
-                  console.log(data);
-      
-                  
-                  const domainDiv = document.createElement("div");
-                  const publicKeyDiv = document.createElement("div");
-                  const nftOwnerDiv = document.createElement("div");
-                  
-                  const domainValue = document.createTextNode(`Domain Name = ${data.data}.sol`);
-                  const publicKeyValue = document.createTextNode(`Public Key =  ${data.publicKey}`);
-                  const nftOwnerValue = document.createTextNode(`NFT Owner = ${data.nftOwner}`);
-                  
-                  domainDiv.appendChild(domainValue);
-                  publicKeyDiv.appendChild(publicKeyValue);
-                  nftOwnerDiv.appendChild(nftOwnerValue);
-                  
-                document.getElementById("results").appendChild(domainDiv);
-                document.getElementById("results").appendChild(publicKeyDiv);
-                document.getElementById("results").appendChild(nftOwnerDiv);
-                document.getElementById("results").appendChild(document.createElement('hr'));
-                
-      
-                });
-            }
-          </script>
+    <script>
+      function search() {
+        // let headersList = {
+        //   Accept: "*/*",
+        // };
+        let result = document.getElementById("value").value;
+        document.getElementById("loader").style.display = "revert";
+        console.log(result);
+        fetch("https://sns-api.milysec.com/" + result, {
+          method: "GET",
+          // headers: headersList,
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            // document.getElementById("results").innerHTML = `Domain Name = ${data.data} <br> `;
+            //   let data = {
+            //       data: "metasal",
+            //       publicKey: "GaxVqiQyJKQDRu6H4pfy9V6Xq19pHGr6HQKDQDv911Y4",
+            //       nftOwner: "undefined",
+            //   };
+            console.log(data);
+
+            const domainDiv = document.createElement("div");
+            const publicKeyDiv = document.createElement("div");
+            const nftOwnerDiv = document.createElement("div");
+
+            const domainValue = document.createTextNode(
+              `Domain Name = ${data.data}.sol`
+            );
+            const publicKeyValue = document.createTextNode(
+              `Public Key =  ${data.publicKey}`
+            );
+            const nftOwnerValue = document.createTextNode(
+              `NFT Owner = ${data.nftOwner}`
+            );
+
+            domainDiv.appendChild(domainValue);
+            publicKeyDiv.appendChild(publicKeyValue);
+            nftOwnerDiv.appendChild(nftOwnerValue);
+
+            document.getElementById("results").appendChild(domainDiv);
+            document.getElementById("results").appendChild(publicKeyDiv);
+            document.getElementById("results").appendChild(nftOwnerDiv);
+            document
+              .getElementById("results")
+              .appendChild(document.createElement("hr"));
+              document.getElementById("loader").style.display = "revert";
+
+          });
+      }
+    </script>
   </body>
 </html>
