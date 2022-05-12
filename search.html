@@ -17,9 +17,10 @@
       <input
         id="value"
         type="search"
-        class="m-5 border rounded-lg text-5xl border-sky-500 p-5 w-4/5"
+        class="m-5 border rounded-lg text-5xl border-sky-500 p-5 w-4/5 lowercase"
         placeholder="Type to search"
         required
+        spellcheck="false"
       />
       .sol
     </div>
@@ -56,7 +57,7 @@
         // let headersList = {
         //   Accept: "*/*",
         // };
-        let result = document.getElementById("value").value;
+        let result = document.getElementById("value").value.trim();
         document.getElementById("loader").style.display = "revert";
         console.log(result);
         fetch("https://sns-api.milysec.com/" + result, {
@@ -67,7 +68,6 @@
             return response.json();
           })
           .then(function (data) {
-            // document.getElementById("results").innerHTML = `Domain Name = ${data.data} <br> `;
             //   let data = {
             //       data: "metasal",
             //       publicKey: "GaxVqiQyJKQDRu6H4pfy9V6Xq19pHGr6HQKDQDv911Y4",
@@ -99,7 +99,7 @@
             document
               .getElementById("results")
               .appendChild(document.createElement("hr"));
-              document.getElementById("loader").style.display = "revert";
+            document.getElementById("loader").style.display = "hide";
 
           });
       }
