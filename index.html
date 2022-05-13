@@ -10,10 +10,10 @@
   </head>
   <body>
     <div
-      class="bg-white rounded-xl shadow-lg m-5 p-5 grid place-content-center justify-center content-center place-self-center text-center"
+      class=" bg-white rounded-xl shadow-lg m-5 p-5 grid place-content-center justify-center content-center place-self-center text-center"
     >
       <h1 class="text-2xl lg:text-5xl font-bold m-10">SOLANA NAME SEARCH</h1>
-      <div class="inline-block align-middle">
+      <div>
         <input
           id="value"
           type="search"
@@ -23,7 +23,7 @@
           spellcheck="false"
         />
         <div class="mb-5">.sol</div>
-      </div>
+      </div><div>
       <button
         id="searchBtn"
         class="btn-primary"
@@ -33,7 +33,20 @@
       </div>
       </button>
       <div id="resultsBox" class="resultsBox"></div>
+<div class="font-bold">Features Coming Soon 👇</div>
+  <hr>
+<div class="text-left m-5">
 
+  <div >
+    ⦿ Buy your Name
+  </div>  
+  <div>
+    ⦿ Search by Twitter handle
+  </div>
+</div>
+  Suggestions? Feedback? Contribute? 
+  <a rel="noopener" href="https://github.com/metasal1/sns-api" target="_blank"><img class="mx-auto" width='20' src="github.png" title="github logo"  /></a>
+</div>
     <div class="footer">
 
       <p class="text-xs padding-10 margin-10">
@@ -79,7 +92,7 @@
             console.log(dateNow)
 
             resultsDiv.innerHTML = `
-            <div class="font-bold">Domain Name</div>   <div id='dn' class='results'>${data.data}.sol</div><button onclick="copyFtn('dn')">✂️</button>
+            <div class="font-bold">Domain Name</div>   <div id='dn' class='results'>${data.data}</div><button onclick="copyFtn('dn')">✂️</button>
             <div class="font-bold">Public Key</div>   <div id='pk' class='results'>${data.publicKey}</div><button onclick="copyFtn('pk')">✂️</button>
             <button onclick='window.open("https://solscan.io/account/${data.publicKey}")'> 🔎 </button>
             <div class="font-bold">NFT Owner</div>   <div id='no' class='results'>${data.nftOwner}</div><button onclick="copyFtn('no')">✂️</button>
