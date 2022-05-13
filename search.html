@@ -13,18 +13,18 @@
       class="bg-white rounded-xl shadow-lg m-10 p-10 grid place-content-center justify-center content-center place-self-center text-center"
     >
       <h1 class="text-5xl font-bold m-10">SOLANA NAME SEARCH</h1>
-      <div class="flex text-3xl align-baseline inline-block ">
-      <input
-        id="value"
-        type="search"
-        class="m-5 border rounded-lg text-5xl border-sky-500 p-5 w-4/5 lowercase"
-        placeholder="Type to search"
-        required
-        spellcheck="false"
-      />
-      .sol
-    </div>
-<div id="loader" class="loader hidden">loading...</div>
+      <div class="flex text-3xl align-baseline inline-block">
+        <input
+          id="value"
+          type="search"
+          class="m-5 border rounded-lg text-5xl border-sky-500 p-5 w-4/5 lowercase"
+          placeholder="Type to search"
+          required
+          spellcheck="false"
+        />
+        .sol
+      </div>
+      <!-- <div id="loader" class="loader hidden">loading...</div> -->
       <button
         id="searchBtn"
         class="padding-3 w-full h-12 px-6 text-white transition-colors duration-150 rounded-lg focus:shadow-outline hover:bg-blue-200 w-full h-12 transition-colors rounded-tl-br bg-gradient-to-r from-cyan-500 to-blue-500"
@@ -32,7 +32,7 @@
       >
         SEARCH
       </button>
-      <div id="results" class="font-bold">Results</div>
+      <div id="results"><h1 class="text-3xl font-bold">Results</h1></div>
       <hr />
       <p class="text-xs padding-10 margin-10">
         Made with ❤️ in Melbourne by
@@ -58,50 +58,40 @@
         //   Accept: "*/*",
         // };
         let result = document.getElementById("value").value.trim();
-        document.getElementById("loader").style.display = "revert";
-        console.log(result);
-        fetch("https://sns-api.milysec.com/" + result, {
-          method: "GET",
-          // headers: headersList,
-        })
+        var resultsDiv = document.getElementById('results');
+          resultsDiv.innerHTML = 'loading...'
+        fetch("https://sns-api.milysec.com/" + result)
           .then(function (response) {
             return response.json();
           })
           .then(function (data) {
-            //   let data = {
-            //       data: "metasal",
-            //       publicKey: "GaxVqiQyJKQDRu6H4pfy9V6Xq19pHGr6HQKDQDv911Y4",
-            //       nftOwner: "undefined",
-            //   };
+              // let data = {
+              //     data: "metasal",
+              //     publicKey: "GaxVqiQyJKQDRu6H4pfy9V6Xq19pHGr6HQKDQDv911Y4",
+              //     nftOwner: "undefined",
+              // };
             console.log(data);
 
-            const domainDiv = document.createElement("div");
-            const publicKeyDiv = document.createElement("div");
-            const nftOwnerDiv = document.createElement("div");
+            var resultsDiv = document.getElementById('results');
+            var dateNow = new Date(Date.now())
+            console.log(dateNow)
 
-            const domainValue = document.createTextNode(
-              `Domain Name = ${data.data}.sol`
-            );
-            const publicKeyValue = document.createTextNode(
-              `Public Key =  ${data.publicKey}`
-            );
-            const nftOwnerValue = document.createTextNode(
-              `NFT Owner = ${data.nftOwner}`
-            );
-
-            domainDiv.appendChild(domainValue);
-            publicKeyDiv.appendChild(publicKeyValue);
-            nftOwnerDiv.appendChild(nftOwnerValue);
-
-            document.getElementById("results").appendChild(domainDiv);
-            document.getElementById("results").appendChild(publicKeyDiv);
-            document.getElementById("results").appendChild(nftOwnerDiv);
-            document
-              .getElementById("results")
-              .appendChild(document.createElement("hr"));
-            document.getElementById("loader").style.display = "hide";
-
+            resultsDiv.innerHTML = `
+            <div class="shadow-xl rounded-xl padding-2 border">
+            <div class="font-bold">Domain Name</div>   <div id='dn' class='hover:text-blue-500'>${data.data}.sol</div><button onclick="copyFtn('dn')">✂️</button>
+            <div class="font-bold">Public Key</div>   <div id='pk' class='hover:text-blue-500'>${data.publicKey}</div><button onclick="copyFtn('pk')">✂️</button>
+            <button onclick='window.open("https://solscan.io/account/${data.publicKey}")'> 🔎 </button>
+            <div class="font-bold">NFT Owner</div>   <div id='no' class='hover:text-blue-500'>${data.nftOwner}</div><button onclick="copyFtn('no')">✂️</button>
+            <div class="font-bold">Date</div>   <div class='text-xs' >${dateNow}</div>
+            </div>
+           `;
           });
+      }
+
+      function copyFtn(a) {
+        var copyText = document.getElementById(a);
+        let d = copyText.innerText;
+        navigator.clipboard.writeText(d);
       }
     </script>
   </body>
