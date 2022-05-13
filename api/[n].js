@@ -9,9 +9,15 @@ module.exports = async(req, res)  => {
     }  
     const hashedName = await getHashedName(query.n);
     const domainKey =  await getNameAccountKey( hashedName,undefined, SOL_TLD_AUTHORITY);
-    const { registry, nftOwner } = await NameRegistryState.retrieve(connection,domainKey);
-    const domainPublicKey = registry.owner?.toBase58()
-    const nftOwnerKey = nftOwner?.toBase58()
-    console.log({ data: `${query.n}`, publicKey: `${domainPublicKey}`, nftOwner: `${nftOwnerKey}` })
-    res.status(200).json({ data: `${query.n}`, publicKey: `${domainPublicKey}`, nftOwner: `${nftOwnerKey}` })
+    try {
+      const { registry, nftOwner } = await NameRegistryState.retrieve(connection,domainKey);
+      const domainPublicKey = registry.owner?.toBase58()
+      const nftOwnerKey = nftOwner?.toBase58()
+      console.log({ data: `${query.n}`, publicKey: `${domainPublicKey}`, nftOwner: `${nftOwnerKey}` })
+      res.status(200).json({ data: `${query.n}`, publicKey: `${domainPublicKey}`, nftOwner: `${nftOwnerKey}` })
+    }
+    catch(error) {
+      res.status(404).json({ data: `${query.n} not found` })
+
+    }
   }
