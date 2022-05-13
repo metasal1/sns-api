@@ -29,29 +29,27 @@
     <link rel="stylesheet" href="styled.css" />
   </head>
   <body>
-    <div
-      class=" bg-white rounded-xl shadow-lg m-5 p-5 grid place-content-center justify-center content-center place-self-center text-center"
-    >
+    <div class=" bg-white rounded-xl shadow-lg m-5 p-5 grid place-content-center justify-center content-center place-self-center text-center">
       <h1 class="text-2xl lg:text-5xl font-bold m-10">SOLANA NAME SEARCH</h1>
       <a href="index.html">
-        <button class="btn-primary opacity-50" disabled >
+        <button class="btn-primary">
           Search by Name
         </button>
       </a>
       <a href="twitter.html">
-        <button class="btn-primary">
+        <button class="btn-primary opacity-50" disabled >
           Search by Twitter
         </button>
-      </a><div>
+      </a>
+      <div>
         <input
           id="value"
           type="search"
-          class="mb-5 border rounded-lg border-sky-500 p-5 lowercase"
-          placeholder="Type to search"
+          class="m-5 border rounded-lg border-sky-500 p-5 lowercase"
+          placeholder="Type twitter handle"
           required
           spellcheck="false"
         />
-        <div class="mb-5">.sol</div>
       </div><div>
       <button
         id="searchBtn"
@@ -70,7 +68,7 @@
     ⦿ Buy your Name
   </div>  
   <div>
-    ⦿ Search by Twitter handle
+    ⦿ Search by Twitter handle ✅
   </div>
 </div>
   Suggestions? Feedback? Contribute? 
@@ -104,7 +102,7 @@
         let result = document.getElementById("value").value.trim();
         var resultsDiv = document.getElementById('resultsBox');
           resultsDiv.innerHTML = 'loading...'
-        fetch("/api/names/" + result)
+        fetch("/api/twitter/" + result)
           .then(function (response) {
             return response.json();
           })
@@ -121,10 +119,10 @@
             console.log(dateNow)
 
             resultsDiv.innerHTML = `
-            <div class="font-bold">Domain Name</div>   <div id='dn' class='results'>${data.data}</div><button onclick="copyFtn('dn')">✂️</button>
-            <div class="font-bold">Public Key</div>   <div id='pk' class='results'>${data.publicKey}</div><button onclick="copyFtn('pk')">✂️</button>
-            <button onclick='window.open("https://solscan.io/account/${data.publicKey}")'> 🔎 </button>
-            <div class="font-bold">NFT Owner</div>   <div id='no' class='results'>${data.nftOwner}</div><button onclick="copyFtn('no')">✂️</button>
+            <div class="font-bold">Twitter Handle</div>   <div id='dn' class='results'>${data.handle}</div><button onclick="copyFtn('dn')">✂️</button>
+            <button onclick='window.open("https://twitter.com/${data.handle}")'> 🐦 </button>
+            <div class="font-bold">Public Key</div>   <div id='pk' class='results'>${data.owner}</div><button onclick="copyFtn('pk')">✂️</button>
+            <button onclick='window.open("https://solscan.io/account/${data.owner}")'> 🔎 </button>
             <div class="font-bold">Date</div>   <div class='text-xs' >${dateNow}</div>
            `;
           });

@@ -5,6 +5,6 @@ let connection = new Connection(clusterApiUrl("mainnet-beta"));
 module.exports = async(req, res)  => {
     const query = req.query
     if (!query.n ) {
-      return res.status(400).json({ data: 'Name not provided - please provide a name in the path' })
+      return res.status(404).json({ data: 'Name not provided - please provide a name in the path' })
     }  
   }

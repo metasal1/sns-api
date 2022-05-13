@@ -469,6 +469,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .btn-primary {
+  margin: 0.5rem;
   width: 80%;
   border-radius: 0.5rem;
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
@@ -554,25 +555,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: auto;
 }
 
-.mx-5 {
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
-}
-
 .mb-5 {
   margin-bottom: 1.25rem;
 }
 
-.inline-block {
-  display: inline-block;
-}
-
 .grid {
   display: grid;
-}
-
-.w-4\/5 {
-  width: 80%;
 }
 
 .place-content-center {
@@ -612,20 +600,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 1.25rem;
 }
 
-.p-20 {
-  padding: 5rem;
-}
-
 .text-left {
   text-align: left;
 }
 
 .text-center {
   text-align: center;
-}
-
-.align-middle {
-  vertical-align: middle;
 }
 
 .text-2xl {
@@ -649,6 +629,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-60 {
+  opacity: 0.6;
+}
+
+.opacity-20 {
+  opacity: 0.2;
 }
 
 .shadow-lg {

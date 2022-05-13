@@ -4,8 +4,12 @@
 
 @layer components {
   .btn-primary {
-    @apply md:text-lg lg:text-2xl text-white w-4/5 bg-gradient-to-r from-primary to-secondary rounded-lg p-3 hover:bg-gradient-to-r hover:from-secondary hover:to-primary;
+    @apply m-2 md:text-lg lg:text-2xl text-white w-4/5 bg-gradient-to-r from-primary to-secondary rounded-lg p-3 hover:bg-gradient-to-r hover:from-secondary hover:to-primary;
   }
+  .btn-secondary {
+    @apply md:text-lg lg:text-2xl text-white w-4/5 bg-gradient-to-r from-secondary to-primary rounded-lg p-3 hover:bg-gradient-to-r hover:from-primary hover:to-secondary;
+  }
+
   .results {
     @apply text-primary hover:text-secondary  text-sm overflow-scroll md:text-lg lg:text-2xl;
   }
