@@ -1,4 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-primary {
+    @apply md:text-lg lg:text-2xl text-white w-4/5 bg-gradient-to-r from-primary to-secondary rounded-lg p-3 hover:bg-gradient-to-r hover:from-secondary hover:to-primary;
+  }
+  .results {
+    @apply text-primary hover:text-secondary  text-sm overflow-scroll md:text-lg lg:text-2xl;
+  }
+  .resultsBox {
+    @apply bg-white rounded-lg text-center m-10;
+  }
+  .footer {
+    @apply fixed p-10;
+  }
+}
+html {
+  height: 100%;
+}
+
 body {
-    background: rgb(153,69,255);
-background: linear-gradient(135deg, rgba(153,69,255,1) 15%, rgba(20,241,149,1) 36%, rgba(0,0,0,1) 99%);
+  background: rgb(153,69,255);
+  background: linear-gradient(
+    135deg,
+    rgba(153, 69, 255, 1) 15%,
+    rgba(20, 241, 149, 1) 36%,
+    rgba(0, 0, 0, 1) 99%
+  );
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding: 10px;
 }
