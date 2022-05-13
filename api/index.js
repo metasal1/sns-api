@@ -5,7 +5,7 @@ let connection = new Connection(clusterApiUrl("mainnet-beta"));
 module.exports = async(req, res)  => {
     const query = req.query
     if (!query.n ) {
-      return res.status(400).json([{ data: 'Name not provided' }])
+      return res.status(400).json({ data: 'Name not provided' })
     }  
     const hashedName = await getHashedName(query.n);
     const domainKey =  await getNameAccountKey( hashedName,undefined, SOL_TLD_AUTHORITY);
@@ -13,5 +13,5 @@ module.exports = async(req, res)  => {
     const domainPublicKey = registry.owner?.toBase58()
     const nftOwnerKey = nftOwner?.toBase58()
     console.log({ data: `${query.n}`, publicKey: `${domainPublicKey}`, nftOwner: `${nftOwnerKey}` })
-    res.status(200).json([{ data: `${query.n}`, publicKey: `${domainPublicKey}`, nftOwner: `${nftOwnerKey}` }])
+    res.status(200).json({ data: `${query.n}`, publicKey: `${domainPublicKey}`, nftOwner: `${nftOwnerKey}` })
   }
