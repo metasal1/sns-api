@@ -4,17 +4,95 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Solana Name Service Lookup API</title>
+    <title>Solana Name Search</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="styled.css" />
   </head>
   <body>
-    <center>
-      <h1>Just add your Solana Domain Name in the URL address bar</h1>
-      <h2><i>or</i> Use the <a href="/search.html">Search</a> page</h2>
+    <div
+      class="bg-white rounded-xl shadow-lg m-5 p-5 grid place-content-center justify-center content-center place-self-center text-center"
+    >
+      <h1 class="text-2xl lg:text-5xl font-bold m-10">SOLANA NAME SEARCH</h1>
+      <div class="inline-block align-middle">
+        <input
+          id="value"
+          type="search"
+          class="mb-5 border rounded-lg border-sky-500 p-5 lowercase"
+          placeholder="Type to search"
+          required
+          spellcheck="false"
+        />
+        <div class="mb-5">.sol</div>
+      </div>
+      <button
+        id="searchBtn"
+        class="btn-primary"
+        onclick="search();"
+      >
+        SEARCH
+      </div>
+      </button>
+      <div id="resultsBox" class="resultsBox"></div>
 
-      <p>
+    <div class="footer">
+
+      <p class="text-xs padding-10 margin-10">
         Made with ❤️ in Melbourne by
-        <a rel="noopener" href="https://milysec.com" target="_blank">Milysec</a>
+        <a
+        rel="noopener"
+        class="hover:text-bold underline"
+        href="https://milysec.com"
+        target="_blank"
+        >Milysec</a
+        >
       </p>
-    </center>
+    </div>
+    <script>
+      document
+        .getElementById("searchBtn")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+        });
+    </script>
+    <script>
+      function search() {
+        let headersList = {
+          Accept: "*/*",
+        };
+        let result = document.getElementById("value").value.trim();
+        var resultsDiv = document.getElementById('resultsBox');
+          resultsDiv.innerHTML = 'loading...'
+        fetch("https://sns-api.milysec.com/api/" + result)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+              // let data = {
+              //     data: "metasal",
+              //     publicKey: "GaxVqiQyJKQDRu6H4pfy9V6Xq19pHGr6HQKDQDv911Y4",
+              //     nftOwner: "undefined",
+              // };
+            console.log(data);
+
+            var resultsDiv = document.getElementById('resultsBox');
+            var dateNow = new Date(Date.now())
+            console.log(dateNow)
+
+            resultsDiv.innerHTML = `
+            <div class="font-bold">Domain Name</div>   <div id='dn' class='results'>${data.data}.sol</div><button onclick="copyFtn('dn')">✂️</button>
+            <div class="font-bold">Public Key</div>   <div id='pk' class='results'>${data.publicKey}</div><button onclick="copyFtn('pk')">✂️</button>
+            <button onclick='window.open("https://solscan.io/account/${data.publicKey}")'> 🔎 </button>
+            <div class="font-bold">NFT Owner</div>   <div id='no' class='results'>${data.nftOwner}</div><button onclick="copyFtn('no')">✂️</button>
+            <div class="font-bold">Date</div>   <div class='text-xs' >${dateNow}</div>
+           `;
+          });
+      }
+
+      function copyFtn(a) {
+        var copyText = document.getElementById(a);
+        let d = copyText.innerText;
+        navigator.clipboard.writeText(d);
+      }
+    </script>
   </body>
 </html>

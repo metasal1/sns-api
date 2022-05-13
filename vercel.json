@@ -1,11 +1,4 @@
 {
-    "rewrites": [
-{
-    "source": "/:n",
-    "destination": "/api/:n"
-}
-    ],
-
     "headers": [
       {
         "source": "/api/(.*)",
